@@ -1,0 +1,96 @@
+<div class="top-container" style="display: flex;flex-direction: row;background-color: #673ab7;align-items: center;min-height: 40px;padding: 10px;">
+  <span style="font-size: larger;color: white;">Crud Application</span>
+  <span class="example-spacer"></span>
+  <button style="border-radius: 5px;height: max-content;padding: 10px;" (click)="openAddEditEmform()" >
+    ADD EMPLOYEE
+  </button>
+</div>
+<div class="main-body">
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)"  #input>
+</mat-form-field>
+
+ <div class="table-container">
+ </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}}</td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+      <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dob">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DOB </th>
+      <td mat-cell *matCellDef="let row"> {{row.dob | date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gendre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gendre </th>
+      <td mat-cell *matCellDef="let row"> {{row.gendre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="education">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Education </th>
+      <td mat-cell *matCellDef="let row"> {{row.education}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company </th>
+      <td mat-cell *matCellDef="let row"> {{row.company}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="exprience">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Exprience </th>
+      <td mat-cell *matCellDef="let row"> {{row.exprience}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="package">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Package </th>
+      <td mat-cell *matCellDef="let row"> {{row.package |currency :'INR'}}LPA</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let row" style="display: flex;flex-direction: row;">
+        <button mat-icon-button>
+          <img src="../assets/pencil (2).png"/>
+        </button>
+        <button mat-icon-button>
+          <img src="../assets/delete.png"/>
+        </button>
+       </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+
+
+
